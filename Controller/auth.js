@@ -56,16 +56,16 @@ module.exports ={
 
   verifyAccount: async (req, res, next) => {
     try {
-        const token = req.query.token;
+        const token = req.query .token;
 
         if(!token) {
             return res.status(400).send({
                 success: false,
                 message: "Invalid verification token",
-            });
+            });  
         }
 
-        const result = jwt.verify(token, process.env.SMPN_PASS);
+        const result = jwt.verify(token, process.env.SCRT_TKN);
          
         if(!result) {
             return res.status(401).send({

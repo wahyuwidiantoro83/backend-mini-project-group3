@@ -1,8 +1,13 @@
-const router = require("express").Router()
+const router = require("express").Router();
 const { accountDetailController } = require("../Controller");
-const {uploader} = require("../Helper/uploader")
+const { uploader } = require("../Helper/uploader");
+const { validateToken } = require("../middleware/validation");
 
-router.post("/registrasi",  accountDetailController.completeProfile);
-
+router.post(
+  "/registrasi",
+  validateToken,
+  uploader("/document").single("fileUpload"),
+  accountDetailController.completeProfile
+);
 
 module.exports = router;

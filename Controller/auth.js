@@ -32,11 +32,21 @@ module.exports ={
     
 
         const result = await auth.create(req.body)
-
-
+        const token = jwt.sign({
+            id: req.body.id,
+            username: req.body.username,
+            email: req.body.email,
+            role: req.body.role
+        },
+         process.env.SCRT_TKN,
+         {
+            expiresIn: "1h"
+         }
+        )
         return res.status(201).send({
             status: true,
-            message: "Register Success"
+            message: "Register Success",
+            token
         })
     } catch (error) {
         console.log(error);
@@ -56,7 +66,7 @@ module.exports ={
         }
 
         const result = jwt.verify(token, process.env.SMPN_PASS);
-
+         
         if(!result) {
             return res.status(401).send({
                  success: false,

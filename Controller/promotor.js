@@ -5,7 +5,13 @@ const fs = require("fs")
 
 
 module.exports = {
-    publish:async(req,res,next)=>{},
+    publish:async(req,res,next)=>{
+      try {
+        
+      } catch (error) {
+        next(templateRes(500,false,"cant publish event",null,error.message))
+      }
+    },
 
     getDataEvent : async(req,res,next)=>{
         try {

@@ -9,20 +9,26 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      countryCode: {
+        type: Sequelize.STRING
+      },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
-      birthDate: {
-        type: Sequelize.DATE
+      address: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
-      telp: {
-        type: Sequelize.STRING
-      },
-      image: {
+      phone: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       document: {
         type: Sequelize.STRING
+      },
+      birthDate: {
+        type: Sequelize.DATE
       },
       bankAcc: {
         type: Sequelize.STRING
@@ -30,10 +36,16 @@ module.exports = {
       reffCode: {
         type: Sequelize.STRING
       },
-      idAuth: {
+      isDeleted: {
+        type: Sequelize.BOOLEAN
+      },
+      authId: {
         type: Sequelize.INTEGER
       },
-      idPoint: {
+      image: {
+        type: Sequelize.STRING
+      },
+      pointId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

@@ -1,8 +1,8 @@
 const eventRouter = require("./event");
 const categoryRouter = require("./category");
 const cityRouter = require("./city");
-const authRouter = require("./auth");
+const authsRouter = require("./auths");
 const accountDetailRouter = require("./accountDetail")
 
-module.exports = { eventRouter, categoryRouter, cityRouter, authRouter,accountDetailRouter };
+module.exports = { eventRouter, categoryRouter, cityRouter, authsRouter,accountDetailRouter };
 

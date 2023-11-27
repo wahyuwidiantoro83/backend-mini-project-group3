@@ -9,44 +9,41 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_promotor: {
-        type: Sequelize.INTEGER
-      },
-      id_category: {
-        type: Sequelize.INTEGER
-      },
-      id_city: {
-        type: Sequelize.INTEGER
-      },
-      event_name: {
+      name: {
         type: Sequelize.STRING
+      },
+      idCity: {
+        type: Sequelize.INTEGER
       },
       address: {
         type: Sequelize.STRING
       },
       type: {
-        type: Sequelize.ENUM('online', 'offline')
+        type: Sequelize.STRING
+      },
+      startDate: {
+        type: Sequelize.DATE
+      },
+      endDate: {
+        type: Sequelize.DATE
+      },
+      startHour: {
+        type: Sequelize.STRING
+      },
+      endHour: {
+        type: Sequelize.STRING
       },
       description: {
         type: Sequelize.STRING
       },
-      picture: {
+      image: {
         type: Sequelize.STRING
       },
-      start_date: {
-        type: Sequelize.STRING
+      idCategory: {
+        type: Sequelize.INTEGER
       },
-      end_date: {
-        type: Sequelize.STRING
-      },
-      start_hour: {
-        type: Sequelize.STRING
-      },
-      end_hour: {
-        type: Sequelize.STRING
-      },
-      isDeleted: {
-        type: Sequelize.BOOLEAN
+      idPromotor: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

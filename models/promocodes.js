@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class auth extends Model {
+  class promocodes extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,19 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      auth.hasOne(models.account_details,{foreignKey:"id_auth"})
-      
     }
   }
-  auth.init({
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    role: DataTypes.STRING,
-    isVerified: DataTypes.BOOLEAN
+  promocodes.init({
+    idPromo: DataTypes.INTEGER,
+    codes: DataTypes.STRING,
+    isDeleted: DataTypes.BOOLEAN
   }, {
     sequelize,
-    modelName: 'auth',
+    modelName: 'promocodes',
   });
-  return auth;
+  return promocodes;
 };

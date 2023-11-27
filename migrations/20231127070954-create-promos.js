@@ -2,39 +2,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('account_details', {
+    await queryInterface.createTable('promos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_auth: {
+      idTicket: {
         type: Sequelize.INTEGER
       },
-      name: {
+      promoName: {
         type: Sequelize.STRING
       },
-      role: {
-        type: Sequelize.ENUM('user', 'promotor')
+      discountAmount: {
+        type: Sequelize.INTEGER
       },
-      birth_date: {
-        type: Sequelize.DATE
-      },
-      telp: {
-        type: Sequelize.STRING
-      },
-      pict: {
-        type: Sequelize.STRING
-      },
-      document: {
-        type: Sequelize.STRING
-      },
-      bank_acc: {
-        type: Sequelize.STRING
-      },
-      reff_code: {
-        type: Sequelize.STRING
+      userLimit: {
+        type: Sequelize.INTEGER
       },
       isDeleted: {
         type: Sequelize.BOOLEAN
@@ -50,6 +35,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('account_details');
+    await queryInterface.dropTable('promos');
   }
 };

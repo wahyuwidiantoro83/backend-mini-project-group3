@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class events extends Model {
     /**
@@ -11,28 +9,31 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      events.belongsTo(models.cities,{foreignKey:"id_city"})
-      events.hasMany(models.tickets,{foreignKey:"id_event"})
-      events.belongsTo(models.categories,{foreignKey:"id_category"})
+      events.belongsTo(models.categories, { foreignKey: "idCategory" });
+      events.belongsTo(models.cities, { foreignKey: "idCity" });
+      events.belongsTo(models.auths, { foreignKey: "idPromotor" });
+      events.hasMany(models.tickets, { foreignKey: "idEvent" });
     }
   }
-  events.init({
-    id_promotor: DataTypes.INTEGER,
-    id_category: DataTypes.INTEGER,
-    id_city: DataTypes.INTEGER,
-    event_name: DataTypes.STRING,
-    address: DataTypes.STRING,
-    type: DataTypes.ENUM('online', 'offline'),
-    description: DataTypes.STRING,
-    picture: DataTypes.STRING,
-    start_date: DataTypes.STRING,
-    end_date: DataTypes.STRING,
-    start_hour: DataTypes.STRING,
-    end_hour: DataTypes.STRING,
-    isDeleted: DataTypes.BOOLEAN
-  }, {
-    sequelize,
-    modelName: 'events',
-  });
+  events.init(
+    {
+      name: DataTypes.STRING,
+      idCity: DataTypes.INTEGER,
+      address: DataTypes.STRING,
+      type: DataTypes.STRING,
+      startDate: DataTypes.DATEONLY,
+      endDate: DataTypes.DATEONLY,
+      startHour: DataTypes.TIME,
+      endHour: DataTypes.TIME,
+      description: DataTypes.STRING,
+      image: DataTypes.STRING,
+      idCategory: DataTypes.INTEGER,
+      idPromotor: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "events",
+    }
+  );
   return events;
 };

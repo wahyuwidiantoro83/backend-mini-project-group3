@@ -2,33 +2,39 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('tickets', {
+    await queryInterface.createTable('accountDetails', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_event: {
-        type: Sequelize.INTEGER
-      },
-      ticket_name: {
+      name: {
         type: Sequelize.STRING
       },
-      price: {
-        type: Sequelize.INTEGER
+      birthDate: {
+        type: Sequelize.DATE
       },
-      stock: {
-        type: Sequelize.INTEGER
-      },
-      sales_start: {
+      telp: {
         type: Sequelize.STRING
       },
-      sales_end: {
+      image: {
         type: Sequelize.STRING
       },
-      isDeleted: {
-        type: Sequelize.BOOLEAN
+      document: {
+        type: Sequelize.STRING
+      },
+      bankAcc: {
+        type: Sequelize.STRING
+      },
+      reffCode: {
+        type: Sequelize.STRING
+      },
+      idAuth: {
+        type: Sequelize.INTEGER
+      },
+      idPoint: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -41,6 +47,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('tickets');
+    await queryInterface.dropTable('accountDetails');
   }
 };

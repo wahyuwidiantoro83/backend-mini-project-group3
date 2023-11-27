@@ -17,7 +17,7 @@ router.patch("/manage-event", promotorController.editPromotorEvent)
 router.delete("/manage-event", promotorController.deletePromotorEvent)
 
 // Routing untuk create event
-router.post("/create-event",)
+router.post("/create-event",promotorController.publish)
 
 // Routing untuk  mendapatkan category
 router.get("/get-category",promotorController.getCategory)

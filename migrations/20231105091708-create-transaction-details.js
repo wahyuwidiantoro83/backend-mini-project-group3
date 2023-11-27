@@ -2,21 +2,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('promo_codes', {
+    await queryInterface.createTable('transactionDetails', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_promo: {
+      idTransaction: {
         type: Sequelize.INTEGER
       },
-      code: {
+      idTicket: {
+        type: Sequelize.INTEGER
+      },
+      ticketCode: {
         type: Sequelize.STRING
       },
-      isDeleted: {
-        type: Sequelize.BOOLEAN
+      subTotal: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -29,6 +32,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('promo_codes');
+    await queryInterface.dropTable('transactionDetails');
   }
 };

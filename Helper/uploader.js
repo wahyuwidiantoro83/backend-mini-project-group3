@@ -1,26 +1,26 @@
-const multer = require("multer")
-const fs=require("fs")
-
-module.exports={
-    uploader : (directory)=>{
+const multer = require("multer");
+const fs = require("fs");
+module.exports = {
+    uploader: (directory) => {
         const defaultDir = "./public"
 
         const storageUploader = multer.diskStorage({
-            destination:(req,file,cb)=>{
-                const pathDir = directory?defaultDir+directory:defaultDir;
-                if(fs.existsSync(pathDir)){
-                    cb(null,pathDir)
+            destination: (req, file, cb) => {
+                const pathDir = directory? defaultDir+directory : defaultDir; 
+                if (fs.existsSync(pathDir)) {
+                    console.log(`Directory ${pathDir} EXIST`);
+                    cb(null, pathDir)
                 } else {
-                    fs.mkdirSync(pathDir,(err)=>{
-                        if(err){
-                            console.log("error create directory", err);
+                    fs.mkdirSync(pathDir, (err) => {
+                        if (err) {
+                            console.log("Error Create Directory", err);
                         }
-                        return cb(err,pathDir)
+                        return cb(err, pathDir);
                     })
                 }
             },
-            filename:(req,file,cb)=>{
-                cb(null,`${Date.now()}--${file.originalname}`)
+            filename:(req,file,cb)=> {
+                cb(null, `${Date.now()}--${file.originalname}`)
             }
         })
 
@@ -31,7 +31,6 @@ module.exports={
                 cb(new Error("Your file extension are denied. Only JPG or PNG", false))
             }
         }
-
-        return multer({storage:storageUploader, fileFilter})
+        return multer({storage:storageUploader, fileFilter}) ;
     }
 }

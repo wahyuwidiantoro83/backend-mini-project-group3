@@ -12,6 +12,7 @@ module.exports = {
                     return next(templateRes(401,false,"Unauthorized Request"))
                 }
                 req.userData = verifyData
+                console.log("masuk ke VP", userData);
                 next()
             }
         } catch (error) {

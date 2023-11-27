@@ -1,14 +1,14 @@
-const { error } = require("console");
+const { error, log } = require("console");
 const db = require("../Helper/mysql");
 const { templateRes } = require("../Helper/utilist");
-const { account_details, events, auth, categories, cities } = require("../models")
+const { accountdetails, events, auths, categories, cities } = require("../models")
 const fs = require("fs")
 const jwt = require("jsonwebtoken");
 
 module.exports = {
   dummyLogin: async (req, res, next) => {
     try {
-      const result = await auth.findOne({
+      const result = await auths.findOne({
         where: { email: req.body.email }, raw: true
       })
       if (result) {
@@ -26,16 +26,11 @@ module.exports = {
 
   checkRole: async (req, res, next) => {
     try {
+      console.log("req user data", req.userData);
       if (req.userData) {
-        const result = await account_details.findOne(
-          {
-          where: {
-            id: req.userData.id
-          },
-          raw: true
-        })
-        if (result.role === "promotor") {
-          next(templateRes(200, true, "You are promotor", result, null))
+        console.log("masuk 1");
+        if (req.userData.role === "promotor") {
+          next(templateRes(200, true, "You are promotor", req.userData.role, null))
         } else {
           next(templateRes(400, false, "you dont have auth", null, null))
         }
@@ -54,27 +49,29 @@ module.exports = {
   },
 
   getDataEvent: async (req, res, next) => {
-    try {
-      return next(templateRes(200, true, "Success connect in API", null, null))
-    } catch (error) {
-      return next(templateRes(500, false, "NOT SUCCESS connect in API", null, null))
-    }
+    // try {
+    //   return next(templateRes(200, true, "Success connect in API", null, null))
+    // } catch (error) {
+    //   return next(templateRes(500, false, "NOT SUCCESS connect in API", null, null))
+    // }
   },
 
   getCategory:async (req, res, next) =>{
-    try {
-      const getAllCategory = await categories.findAll({raw:true})
-      return next(templateRes(201, true, "get category success", getAllCategory, null))
-    } catch (error) {
-      next(templateRes(500,false,"cannot get category",null,error,message))
-    }
+    // try {
+    //   const getAllCategory = await categories.findAll({raw:true})
+    //   // return next(templateRes(201, true, "get category success", getAllCategory, null))
+
+    // } catch (error) {
+    //   next(templateRes(500,false,"cannot get category",null,error,message))
+    // }
   },
 
   getPromotorEvent: async (req, res, next) => {
     try {
+      console.log("get promotor event",req.userData);
       const getEvent = await events.findAll({
         where: {
-          id_promotor: req.userData.id
+          idPromotor: req.userData.id
         },
         include: [
           { // ini untuk join tabel
@@ -90,13 +87,14 @@ module.exports = {
       ],
         raw: true
       })
+      console.log("get Event");
       const arrayEvent = getEvent.map((val, idx) => {
         return {
           idEvent:val.id,
-          name: val.event_name,
+          name: val.name,
           category: val["category.category"],
           sold:0,
-          date: `${new Date(val.start_date).toLocaleDateString("en",{day:"numeric", day: "numeric", month: "short", year: "numeric"})}`,
+          date: `${new Date(val.startDate).toLocaleDateString("en",{day:"numeric", day: "numeric", month: "short", year: "numeric"})}`,
           status:"active"
         }
       })

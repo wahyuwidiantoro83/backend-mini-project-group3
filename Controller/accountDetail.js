@@ -1,7 +1,7 @@
-const { auth, account_detail } = require("../models");
+const { auth, accountDetails } = require("../models");
 const bcrypt = require("bcrypt");
 const transporter = require("../Helper/mailer");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   completeProfile: async (req, res, next) => {
@@ -32,18 +32,16 @@ module.exports = {
       }
 
       const accountDetailData = {
-        countryCode: req.body.countryCode,
         name: req.body.name,
-        address: req.body.address,
         phone: req.body.phone,
-        birth_date: req.body.birth_date,
+        birthDate: req.body.birth_date,
         // reff_code: req.body.reff_code,
         authId: userData.id, // Hubungan antara tabel auth dan account_detail melalui authId
         pointId: req.body.pointId,
       };
 
       if (userData.role === "USER") {
-        accountDetailData.birth_date = req.body.birth_date;
+        accountDetailData.birthDate = req.body.birth_date;
 
         // Membuat referral code dengan (username + random number)
         const randomNum = Math.floor(1000 + Math.random() * 900);
@@ -54,25 +52,25 @@ module.exports = {
         console.log(accountDetailData.reff_code);
 
         accountDetailData.pointId = req.body.pointId;
-      // } else if (userData.role === "EVENT ORGANIZER") {
-      //   if (req.files && req.files.length > 0) {
-      //     const documentPaths = req.files.map((file) => file.path);
-      //     accountDetailData.document = documentPaths;
-      //     return res.status(200).send({
-      //       success: true,
-      //       message: "File Upload"
-      //     })
-      //   } else {
-      //     return res.status(400).send({
-      //       success: false,
-      //       message: "No document files uploaded.",
-      //     }); 
-      //   }
-      //   accountDetailData.bank_acc = req.body.bank_acc;
+        // } else if (userData.role === "EVENT ORGANIZER") {
+        //   if (req.files && req.files.length > 0) {
+        //     const documentPaths = req.files.map((file) => file.path);
+        //     accountDetailData.document = documentPaths;
+        //     return res.status(200).send({
+        //       success: true,
+        //       message: "File Upload"
+        //     })
+        //   } else {
+        //     return res.status(400).send({
+        //       success: false,
+        //       message: "No document files uploaded.",
+        //     });
+        //   }
+        //   accountDetailData.bank_acc = req.body.bank_acc;
       }
 
       // Simpan data ke dalam tabel account_detail
-      const result = await account_detail.create(accountDetailData);
+      const result = await accountDetails.create(accountDetailData);
 
       const token = jwt.sign(
         {

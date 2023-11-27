@@ -3,7 +3,8 @@ const { authController } = require("../Controller");
 const {validateToken} = require("../middleware/validation")
 
 router.post("/regis",  authController.register);
-router.get("/verify", authController.verifyAccount);
+router.post("/verify", validateToken, authController.verifyAccount);
+router.post("/login", validateToken, authController.login)
 
 
 module.exports = router

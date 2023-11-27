@@ -8,36 +8,34 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   dummyLogin: async (req, res, next) => {
     try {
+      console.log("ashasdbjhads",req.body);
       const result = await auths.findOne({
         where: { email: req.body.email }, raw: true
       })
+      console.log("ini result", result);
       if (result) {
-        const { id, username, email, role } = result
-        const token = jwt.sign({ id, role, username }, process.env.SCRT_TKN)
+        console.log("yuygefjhsbfdsb");
+        const { id, email,username, role } = result
+        const token = jwt.sign({ id, role,username, email }, process.env.SCRT_TKN)
         return next(templateRes(201, true, "success login", token, null))
       } else {
         next(templateRes(400, false, "Error login", null, error.message))
       }
 
     } catch (error) {
-      return next(templateRes(201, true, "success login", null, null))
+      console.log(error.message);
+      return next(templateRes(201, true, "success login", null, error.message))
     }
   },
 
   checkRole: async (req, res, next) => {
     try {
-      console.log("req user data", req.userData);
-      if (req.userData) {
-        console.log("masuk 1");
-        if (req.userData.role === "promotor") {
-          next(templateRes(200, true, "You are promotor", req.userData.role, null))
-        } else {
-          next(templateRes(400, false, "you dont have auth", null, null))
-        }
+      if(req.token) {
+        const result = jwt.verify(req.token)
+        console.log("ini adalah result",result);
       }
-
     } catch (error) {
-      next(templateRes(500, false, "you dont have auth", null, error.message))
+      return next(templateRes(500, true, "You dont have Authorization", null, error.message))
     }
   },
   publish: async (req, res, next) => {

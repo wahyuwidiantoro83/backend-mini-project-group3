@@ -6,12 +6,12 @@ const cors = require("cors");
 const bearer = require("express-bearer-token");
 app.use(cors());
 app.use(express.json());
+// app.use("/event", EventRoute);
+app.use(bearer());
 
 // const EventRoute = require("./Routes/EventRoute");
 const {promotorRouter} = require("./Routes")
 
-// app.use("/event", EventRoute);
-app.use(bearer());
 // app.use(bearerToken());
 app.use("/promotor", promotorRouter);
 

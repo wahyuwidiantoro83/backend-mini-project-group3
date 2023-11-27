@@ -4,6 +4,8 @@ const { templateRes } = require("../Helper/utilist")
 module.exports = {
     validateTokenPromotor : (req,res,next)=>{
         try {
+            console.log("cek validate token");
+            console.log("req.token", req.token);
             if(!req.token){
                 return next(templateRes(400,false,"You dont have account",null,null))
             } else {
@@ -12,7 +14,7 @@ module.exports = {
                     return next(templateRes(401,false,"Unauthorized Request"))
                 }
                 req.userData = verifyData
-                console.log("masuk ke VP", userData);
+                console.log("verify data", req.userData);
                 next()
             }
         } catch (error) {
@@ -23,6 +25,7 @@ module.exports = {
 
     validateRolePromotor : (req,res,next)=>{
         try {
+            console.log("masuk sini dong");
             const verifyData = jwt.verify(req.token, process.env.SCRT_TKN)
             if(verifyData.role==="promotor"){
                 req.userData = verifyData

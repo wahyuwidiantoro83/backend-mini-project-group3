@@ -9,7 +9,7 @@ router.post("/publish",validateTokenPromotor,promotorController.publish)
 
 // Routing untuk landing login promotor
 router.post("/", promotorController.dummyLogin)
-router.post("/auth/checkrole",validateTokenPromotor, promotorController.checkRole)
+router.get("/checkrole",validateTokenPromotor, promotorController.checkRole)
 
 // Routing untuk manage event
 router.get("/manage-event", validateTokenPromotor,promotorController.getPromotorEvent)

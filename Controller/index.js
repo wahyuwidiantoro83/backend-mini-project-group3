@@ -1,3 +1,4 @@
+const promotorController = require("./promotor")
 const accountDetailController = require("./accountDetail");
 const authsController = require("./auths");
 const categoryController = require("./category");
@@ -10,7 +11,7 @@ module.exports ={
     eventController,
     categoryController,
     cityController,
+    promotorController,
     transactionController,
-
 };
 

@@ -25,13 +25,12 @@ module.exports = {
         })
 
         const fileFilter = (req,file,cb)=>{
-            if (file.originalname.toLowerCase().includes(".pdf")) {
-                cb(null, true)
+            if(file.originalname.toLowerCase().includes(".png")||file.originalname.toLowerCase().includes(".jpg")||file.originalname.toLowerCase().includes(".jpeg")){
+                cb(null,true)
             } else {
-                cb (new Error("Your file extension are denied. Only PDF", false))
+                cb(new Error("Your file extension are denied. Only JPG or PNG", false))
             }
-        } 
-
+        }
         return multer({storage:storageUploader, fileFilter}) ;
     }
 }

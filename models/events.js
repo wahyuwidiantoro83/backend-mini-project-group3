@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       events.belongsTo(models.cities, { foreignKey: "idCity" });
       events.belongsTo(models.auths, { foreignKey: "idPromotor" });
       events.hasMany(models.tickets, { foreignKey: "idEvent" });
+      events.hasMany(models.promos, { foreignKey: "idEvent" });
     }
   }
   events.init(

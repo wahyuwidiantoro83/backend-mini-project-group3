@@ -3,10 +3,18 @@ const PORT = process.env.PORT || 2066;
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const bearerToken = require("express-bearer-token");
+const bearer = require("express-bearer-token");
 app.use(cors());
 app.use(express.json());
-app.use(bearerToken());
+// app.use("/event", EventRoute);
+app.use(bearer());
+
+// const EventRoute = require("./Routes/EventRoute");
+const {promotorRouter} = require("./Routes")
+
+// app.use(bearerToken());
+app.use("/promotor", promotorRouter);
+
 
 const { authsRouter, accountDetailRouter } = require("./Routes");
 app.use("/auths", authsRouter);
@@ -16,11 +24,8 @@ app.use("/public", express.static("public"));
 //Define Route
 const { eventRouter, categoryRouter, cityRouter } = require("./Routes");
 app.use("/event", eventRouter);
-
 app.use("/category", categoryRouter);
-
 app.use("/city", cityRouter);
-
 app.use("/public", express.static("public"));
 
 app.use((error, req, res, next) => {

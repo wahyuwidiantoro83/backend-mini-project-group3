@@ -2,29 +2,39 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("tickets", {
+    await queryInterface.createTable("auths", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      idEvent: {
-        type: Sequelize.INTEGER,
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-      level: {
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      username: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      role: {
+        type: Sequelize.STRING,
+        defaultValue: "user",
+        allowNull: false,
+      },
+      isVerified: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+      },
+      token: {
         type: Sequelize.STRING,
       },
-      price: {
-        type: Sequelize.INTEGER,
-      },
-      stock: {
-        type: Sequelize.INTEGER,
-      },
-      ticketSalesStart: {
-        type: Sequelize.DATE,
-      },
-      ticketSalesEnd: {
+      deletedAt: {
         type: Sequelize.DATE,
       },
       createdAt: {
@@ -38,6 +48,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("tickets");
+    await queryInterface.dropTable("auths");
   },
 };

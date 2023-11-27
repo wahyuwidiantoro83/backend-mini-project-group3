@@ -6,8 +6,8 @@ const { validateToken } = require("../middleware/validation");
 router.post(
   "/registrasi",
   validateToken,
-  uploader("/document").single("fileUpload"),
   accountDetailController.completeProfile
 );
+router.patch("/update/:id", validateToken, accountDetailController.updateAccountDetail)
 
 module.exports = router;

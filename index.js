@@ -16,8 +16,8 @@ const {promotorRouter} = require("./Routes")
 app.use("/promotor", promotorRouter);
 
 
-const { authRouter, accountDetailRouter } = require("./Routes");
-app.use("/auth", authRouter);
+const { authsRouter, accountDetailRouter } = require("./Routes");
+app.use("/auths", authsRouter);
 app.use("/accountDetail", accountDetailRouter);
 app.use("/public", express.static("public"));
 

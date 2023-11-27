@@ -21,6 +21,12 @@ module.exports = {
       stock: {
         type: Sequelize.INTEGER,
       },
+      ticketSalesStart: {
+        type: Sequelize.DATE,
+      },
+      ticketSalesEnd: {
+        type: Sequelize.DATE,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

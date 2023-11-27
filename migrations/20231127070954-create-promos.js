@@ -12,7 +12,13 @@ module.exports = {
       idTicket: {
         type: Sequelize.INTEGER
       },
+      idEvent: {
+        type: Sequelize.INTEGER
+      },
       promoName: {
+        type: Sequelize.STRING
+      },
+      codes: {
         type: Sequelize.STRING
       },
       discountAmount: {

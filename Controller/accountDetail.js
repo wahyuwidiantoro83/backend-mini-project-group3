@@ -1,4 +1,4 @@
-const { auths, accountDetail } = require("../models");
+const { auths, accountDetails } = require("../models");
 const bcrypt = require("bcrypt");
 const transporter = require("../Helper/mailer");
 const jwt = require("jsonwebtoken");
@@ -32,12 +32,9 @@ module.exports = {
       }
 
       const accountDetailData = {
-        countryCode: req.body.countryCode,
         name: req.body.name,
-        address: req.body.address,
         phone: req.body.phone,
         birthDate: req.body.birthDate,
-        // reff_code: req.body.reff_code,
         authId: userData.id, // Hubungan antara tabel auth dan account_detail melalui authId
         pointId: req.body.pointId,
       };
@@ -54,10 +51,12 @@ module.exports = {
         console.log(accountDetailData.reffCode);
 
         accountDetailData.pointId = req.body.pointId;
+
       }
 
       // Simpan data ke dalam tabel account_detail
-      const result = await accountDetail.create(accountDetailData);
+      const result = await accountDetails.create(accountDetailData);
+
 
       const token = jwt.sign(
         {
@@ -100,7 +99,7 @@ module.exports = {
     try {
       console.log("Body Permintaan", req.userData);
       console.log("Nilai req.userData:", req.userData);
-      const result = await accountDetail.update(req.body, {
+      const result = await accountDetails.update(req.body, {
         where: {
           id: req.params.id,
         },

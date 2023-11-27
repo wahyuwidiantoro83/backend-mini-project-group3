@@ -2,7 +2,7 @@ const db = require("../models");
 const auth = require("../models/auth.js");
 const transactions = require("../models/transactions.js");
 const transactionDetails = require("../models/transactiondetails.js")
-const accountDetail = require("../models/accountDetail.js");
+const accountDetails = require("../models/accountDetails.js");
 const events = require("../models/event.js");
 const tickets = require("../models/ticket.js");
 const points = require("../models/point.js");
@@ -24,7 +24,7 @@ module.exports = {
           id: idTicket,
         },
       });
-      const findAccountDetail = await accountDetail.findOne({
+      const findAccountDetail = await accountDetails.findOne({
         where: {
           idUser: id,
         },
@@ -48,7 +48,7 @@ module.exports = {
           },
         }
       );
-      const updateBalance = await accountDetail.update(
+      const updateBalance = await accountDetails.update(
         {
           balance: newBalance,
         },

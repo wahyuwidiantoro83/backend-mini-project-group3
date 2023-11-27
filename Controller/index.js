@@ -1,5 +1,5 @@
 const accountDetailController = require("./accountDetail");
-const authsController = require("./auth");
+const authsController = require("./auths");
 const categoryController = require("./category");
 const eventController = require("./event");
 const cityController = require("./city");

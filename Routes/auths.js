@@ -7,4 +7,4 @@ router.post("/verify", validateToken, authsController.verifyAccount);
 router.post("/login", validateToken, authsController.login)
 
 
-module.exports = router
+module.exports = router;

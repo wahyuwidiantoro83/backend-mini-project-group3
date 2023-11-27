@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(bearerToken());
 
 const { authsRouter, accountDetailRouter } = require("./Routes");
-app.use("/auths", authRouter);
+app.use("/auths", authsRouter);
 app.use("/accountDetail", accountDetailRouter);
 app.use("/public", express.static("public"));
 

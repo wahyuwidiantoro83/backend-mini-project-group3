@@ -1,10 +1,10 @@
-const router = require("express").Router()
+const router = require("express").Router();
 const { authsController } = require("../Controller");
-const {validateToken} = require("../middleware/validation")
+const { validateToken } = require("../middleware/validation");
 
-router.post("/regis",  authsController.register);
+router.post("/regis", authsController.register);
 router.post("/verify", validateToken, authsController.verifyAccount);
-router.post("/login", validateToken, authsController.login)
-
+router.post("/login", authsController.login);
+router.delete("/delete/:id", validateToken, authsController.deleteUser);
 
 module.exports = router;

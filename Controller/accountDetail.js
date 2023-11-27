@@ -51,21 +51,19 @@ module.exports = {
         console.log(accountDetailData.reffCode);
 
         accountDetailData.pointId = req.body.pointId;
-
       }
 
       // Simpan data ke dalam tabel account_detail
       const result = await accountDetails.create(accountDetailData);
 
-
       const token = jwt.sign(
         {
           email: req.userData.email,
-          id: req.userData.id
+          id: req.userData.id,
         },
-        process.env.SCRT_TKN,
+        process.env.SCRT_KEY,
         {
-          expiresIn: "1h",
+          expiresIn: "7d",
         }
       );
 

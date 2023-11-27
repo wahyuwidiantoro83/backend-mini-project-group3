@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   promos.init({
     id_ticket: DataTypes.INTEGER,
-    name: DataTypes.STRING,
+    promo_name: DataTypes.STRING,
     discount_amount: DataTypes.INTEGER,
     user_limit: DataTypes.INTEGER,
     isDeleted: DataTypes.BOOLEAN

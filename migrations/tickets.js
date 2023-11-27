@@ -12,7 +12,7 @@ module.exports = {
       id_event: {
         type: Sequelize.INTEGER
       },
-      name: {
+      ticket_name: {
         type: Sequelize.STRING
       },
       price: {

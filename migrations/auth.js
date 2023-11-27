@@ -2,26 +2,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('promos', {
+    await queryInterface.createTable('auths', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_ticket: {
-        type: Sequelize.INTEGER
-      },
-      promo_name: {
+      username: {
         type: Sequelize.STRING
       },
-      discount_amount: {
-        type: Sequelize.INTEGER
+      email: {
+        type: Sequelize.STRING
       },
-      user_limit: {
-        type: Sequelize.INTEGER
+      password: {
+        type: Sequelize.STRING
       },
-      isDeleted: {
+      role: {
+        type: Sequelize.STRING
+      },
+      isVerified: {
         type: Sequelize.BOOLEAN
       },
       createdAt: {
@@ -35,6 +35,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('promos');
+    await queryInterface.dropTable('auths');
   }
 };

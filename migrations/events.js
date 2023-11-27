@@ -18,7 +18,7 @@ module.exports = {
       id_city: {
         type: Sequelize.INTEGER
       },
-      name: {
+      event_name: {
         type: Sequelize.STRING
       },
       address: {
@@ -33,7 +33,7 @@ module.exports = {
       picture: {
         type: Sequelize.STRING
       },
-      rt_date: {
+      start_date: {
         type: Sequelize.STRING
       },
       end_date: {

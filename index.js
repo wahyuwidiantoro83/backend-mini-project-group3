@@ -11,9 +11,8 @@ app.use(express.json());
 const {promotorRouter} = require("./Routes")
 
 // app.use("/event", EventRoute);
-app.use("/promotor", promotorRouter);
 app.use(bearer());
-
+app.use("/promotor", promotorRouter);
 
 app.use("/public", express.static("public")); 
 

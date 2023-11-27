@@ -1,4 +1,4 @@
-const { auth } = require("../models")
+const { auths } = require("../models")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { transporter } = require("../Helper/mailer");
@@ -10,8 +10,8 @@ module.exports ={
     try {
         console.log("CHECK DATA FROM CLIENT", req.body);
 
-        console.log("Auth Model", auth);
-        const isExist = await auth.findOne({
+        console.log("Auths Model", auths);
+        const isExist = await auths.findOne({
             where: {
                 [Op.or]: [{email: req.body.email}, {username: req.body.username}]
             }
@@ -31,7 +31,7 @@ module.exports ={
 
     
 
-        const result = await auth.create(req.body)
+        const result = await auths.create(req.body)
         const token = jwt.sign({
             id: req.body.id,
             username: req.body.username,
@@ -57,7 +57,7 @@ module.exports ={
   verifyAccount: async (req, res, next) => {
     try {
         console.log(req.userData);
-        const verifikasi = await auth.findOne({
+        const verifikasi = await auths.findOne({
             where: { email: req.userData.email},
             attributes: {exclude: ["password"]},
         });
@@ -69,11 +69,11 @@ module.exports ={
                 message: "account not register",
             });  
         }
-        await auth.update({
+        await auths.update({
             isVerified: true
         }, {
             where: {
-                id: req.userData.id
+                id: req.userData .id
             }
         });
 
@@ -93,7 +93,7 @@ module.exports ={
     console.log("masuk ga ya",req.body);
     try {
         const { email, password } = req.body;
-        const result = await auth.findOne({
+        const result = await auths.findOne({
             where: {
                 email: email
             }
@@ -134,7 +134,7 @@ module.exports ={
         const salt = await bcrypt.genSalt(10)
         const hashPassword = await bcrypt.hash(req.body.password, salt)
         req.body.password = hashPassword
-        const result = await auth.update(body, {
+        const result = await auths.update(body, {
             where: {
                 id: id
             }
@@ -152,7 +152,7 @@ module.exports ={
   forgetPassword : async (req, res, next) => {
     try {
         const { email } = req.body;
-        const result = await auth.findOne({
+        const result = await auths.findOne({
             where: {
                 email: email
             }
@@ -206,7 +206,7 @@ module.exports ={
         }
         const salt = await bcrypt.genSalt(10)
         const hashPassword = await bcrypt.hash(password, salt)
-        await auth.update({
+        await auths.update({
             password: hashPassword
         }, {
             where: {
@@ -225,7 +225,7 @@ module.exports ={
 deleteUser: async (req, res, next) => {
     try {
         const { id } = req.params;
-        const result = await auth.destroy({
+        const result = await auths.destroy({
             where: {
                 id: id
             }

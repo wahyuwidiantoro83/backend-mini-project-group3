@@ -1,4 +1,4 @@
-const { auth, account_detail } = require("../models");
+const { auths, accountDetail } = require("../models");
 const bcrypt = require("bcrypt");
 const transporter = require("../Helper/mailer");
 const jwt = require("jsonwebtoken");
@@ -10,7 +10,7 @@ module.exports = {
       console.log("Body Permintaan", req.userData);
       console.log("Nilai req.userData:", req.userData);
 
-      const userData = await auth.findOne({
+      const userData = await auths.findOne({
         where: { email: req.userData.email },
       });
 
@@ -36,7 +36,7 @@ module.exports = {
         name: req.body.name,
         address: req.body.address,
         phone: req.body.phone,
-        birth_date: req.body.birthDate,
+        birthDate: req.body.birthDate,
         // reff_code: req.body.reff_code,
         authId: userData.id, // Hubungan antara tabel auth dan account_detail melalui authId
         pointId: req.body.pointId,
@@ -57,7 +57,7 @@ module.exports = {
       }
 
       // Simpan data ke dalam tabel account_detail
-      const result = await account_detail.create(accountDetailData);
+      const result = await accountDetail.create(accountDetailData);
 
       const token = jwt.sign(
         {
@@ -77,7 +77,7 @@ module.exports = {
         to: "nivar10673@mainoj.com",
         subject: "Account Verification",
         html: `<h1>Hello, ${req.body.name}, please verify your account:</h1>
-                <a href="http://localhost:5173/auth/verify?token=${token}">CLICK TO VERIFY</a>`,
+                <a href="http://localhost:5173/auths/verify?token=${token}">CLICK TO VERIFY</a>`,
       });
 
       console.log("Verification email sent successfully");
@@ -100,7 +100,7 @@ module.exports = {
     try {
       console.log("Body Permintaan", req.userData);
       console.log("Nilai req.userData:", req.userData);
-      const result = await account_detail.update(req.body, {
+      const result = await accountDetail.update(req.body, {
         where: {
           id: req.params.id,
         },

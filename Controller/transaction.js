@@ -1,18 +1,20 @@
 const db = require("../models");
-const auth = require("../models/auth.js");
-const transactions = require("../models/transactions.js");
-const transactionDetails = require("../models/transactiondetails.js")
-const accountDetails = require("../models/accountDetails.js");
-const events = require("../models/event.js");
-const tickets = require("../models/ticket.js");
-const points = require("../models/point.js");
+const {
+  auths,
+  transactions,
+  transactionDetails,
+  accountDetails,
+  events,
+  tickets,
+  points,
+} = require("../models");
 const nodemailer = require("nodemailer");
 const { transporter } = require("../Helper/mailer.js");
 
 module.exports = {
   createTransaction: async (req, res) => {
     try {
-      const { id } = req.user;
+      const { id } = req.body;
       const { idEvent, idTicket, qty } = req.body;
       const findEvent = await events.findOne({
         where: {
@@ -77,10 +79,10 @@ module.exports = {
       });
 
       await transporter.sendMail({
-        from: "Admin", 
+        from: "Admin",
         to: "nivar10673@mainoj.com",
         subject: "Transaction Confirmation",
-        html: `<h1>Hello, ${req.body.name}, Your transaction has been confirmed. </h1>`
+        html: `<h1>Hello, ${req.body.name}, Your transaction has been confirmed. </h1>`,
       });
       console.log("Your transaction has been confirmed.");
 

@@ -126,7 +126,12 @@ module.exports = {
       return res.status(200).send({
         success: true,
         message: "Login Success",
-        token,
+        result: {
+          username: result.username,
+          email: result.email,
+          role: result.role,
+          token,
+        },
       });
     } catch (error) {
       console.log(error);
